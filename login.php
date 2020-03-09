@@ -4,14 +4,14 @@ include("includes/header.html");
 require("bd/bd.php");
 
 if(!empty($_POST['username']) && !empty($_POST['password'])){
-    $records=$conn->prepare("SELECT username,contrasena,Notas,Prom_Pond,Cod_materia,Encuesta_R WHERE username=:username");
+    $records=$conn->prepare("SELECT * FROM tb_estudiante WHERE username=:username");
     $records->bindParam(':username',$_POST['username']);
     $records->execute();
     $results=$records->fetch(PDO::FETCH_ASSOC);
 
     $message="";
     var_dump($results);
-    if(password_verify($_POST['contrasena'],$results['contrasena'])){
+    if(password_verify($_POST['password'],$results['contrasena'])){
         $_SESSION['username']=$results['username'];
         $message="Login Exitoso";
         header('Location: contenido.php');
