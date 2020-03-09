@@ -4,12 +4,13 @@ require('../bd/bd.php');
 
 $message="";
     
-if (!empty($_POST['Nomb_materia']) && !empty($_POST['Cod_materia']) && !empty($_POST['Cred']) ) {
-    $sql = "INSERT INTO tb_materia (Nomb_materia,Cod_materia,Cred) VALUES (:Nomb_materia, :Cod_materia,:Cred)";
+if (!empty($_POST['Nomb_materia']) && !empty($_POST['Cod_materia']) && !empty($_POST['Cred']) && !empty($_POST['Cod_P'])) {
+    $sql = "INSERT INTO tb_materia (Nomb_materia,Cod_materia,Cred,Cod_P) VALUES (:Nomb_materia, :Cod_materia,:Cred,:Cod_P)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':Nomb_materia', $_POST['Nomb_materia']);
     $stmt->bindParam(':Cod_materia',$_POST['Cod_materia']);
     $stmt->bindParam(':Cred',$_POST['Cred']);
+    $stmt->bindParam(':Cod_P',$_POST['Cod_P']);
     if ($stmt->execute()) {
       $message = 'Successfully created new user';
     } else {
@@ -37,6 +38,10 @@ if (!empty($_POST['Nomb_materia']) && !empty($_POST['Cod_materia']) && !empty($_
             <div class="col">
                 <label for=""> Creditos de la materia:</label>
                 <input type="text" name="Cred" id="">
+            </div>
+            <div class="col">
+                <label for="">Codigo del profesor que la imparte</label>
+                <input type="text" name="Cod_P" id="">
             </div>
             <button type="submit" value="Send" class="btn btn-primary">Registrar Materia</button>
         </div>

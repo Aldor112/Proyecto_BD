@@ -4,16 +4,27 @@ require('../bd/bd.php');
 
 $message="";
 
-if (!empty($_POST['username']) && !empty($_POST['contrasena']) && !empty($_POST['Cod_materia'])){
-    $sql="INSERT INTO tb_estudiante (username,contrasena,Cod_materia) VALUES (:username,:contrasena,:Cod_materia)";
+if (!empty($_POST['username']) && !empty($_POST['contrasena']) && empty($_POST['Cod_materia'])){
+    $sql="INSERT INTO tb_estudiante (username,contrasena) VALUES (:username,:contrasena)";
     $stmt=$conn->prepare($sql);
     $stmt->bindParam(':username',$_POST['username']);
     $password= password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
     $stmt->bindParam(':contrasena',$password);
-    $stmt->bindParam(':Cod_materia',$_POST['Cod_materia']);
 
-    echo var_dump($sql);
-    echo var_dump($_POST);
+    if ($stmt->execute()){
+        $message='Usuario creado exitosamente';
+    }else{
+        $message='Error al Crear un Usuario';
+    }
+}
+
+if (!empty($_POST['username']) && !empty($_POST['contrasena']) && !empty($_POST['Cod_materia'])){
+    $sql="INSERT INTO tb_estudiante (username,contrasena,Cod_materia) VALUES (:username,:contrasena,:Cod_materia)";
+    $stmt=$conn->prepare($sql);
+    $stmt->bindParam(':Cod_materia',$_POST['Cod_materia']);
+    $stmt->bindParam(':username',$_POST['username']);
+    $password= password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
+    $stmt->bindParam(':contrasena',$password);
     
     if ($stmt->execute()){
         $message='Usuario creado exitosamente';
@@ -21,6 +32,7 @@ if (!empty($_POST['username']) && !empty($_POST['contrasena']) && !empty($_POST[
         $message='Error al Crear un Usuario';
     }
 }
+
 ?>
 
 <body>
