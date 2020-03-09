@@ -12,11 +12,15 @@ if (!empty($_POST['Nomb_materia']) && !empty($_POST['Cod_materia']) && !empty($_
     $stmt->bindParam(':Cred',$_POST['Cred']);
     $stmt->bindParam(':Cod_P',$_POST['Cod_P']);
     if ($stmt->execute()) {
-      $message = 'Successfully created new user';
+      $message = 'Nueva Materia Agregada';
     } else {
-      $message = 'Sorry there must have been an issue creating your account';
+      $message = 'Error al agregar materia';
     }
+  }else{
+      $message='Por Favor introduzca todos los datos';
   }
+
+  
 
   
 ?>
