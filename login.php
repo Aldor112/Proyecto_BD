@@ -10,7 +10,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])){
     $results=$records->fetch(PDO::FETCH_ASSOC);
 
     $message="";
-    var_dump($results);
+
     if(password_verify($_POST['password'],$results['contrasena'])){
         $_SESSION['username']=$results['username'];
         $message="Login Exitoso";

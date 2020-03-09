@@ -54,7 +54,7 @@ if (!empty($_POST['username']) && !empty($_POST['contrasena']) && !empty($_POST[
             </div>
             <div class="col form-control">
                 <label for="">  Codigo de la materia que estudia: </label>
-                <input type="text" name="Cod_materia" id="">
+                <input type="text" name="Cod_materia" id="" placeholder="Deje en blanco si no tiene una">
             </div>
             <button type="submit" value="Send" class="btn btn-success">Registrar Estudiante:</button>
         </div>
