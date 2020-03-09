@@ -17,6 +17,8 @@ if (!empty($_POST['Nomb_materia']) && !empty($_POST['Cod_materia']) && !empty($_
       $message = 'Sorry there must have been an issue creating your account';
     }
   }
+
+  
 ?>
 <body>
 <?php  if(!empty($message)): ?>

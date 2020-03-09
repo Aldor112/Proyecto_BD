@@ -9,3 +9,4 @@ ALTER TABLE `tb_materia` CHANGE `Cod_P` `Cod_P` INT(32) NULL;
 para la tabla estudiante
 CREATE TABLE `db_proyecto`.`tb_estudiante` ( `username` VARCHAR(32) NOT NULL , `contrasena` VARCHAR(32) NOT NULL , `Notas` INT(2) NULL DEFAULT NULL , `Prom_Pond` INT(2) NULL DEFAULT NULL , `Cod_materia` INT(10) NULL DEFAULT NULL , PRIMARY KEY (`username`));
 ALTER TABLE `tb_estudiante` ADD FOREIGN KEY (`Cod_materia`) REFERENCES `tb_materia`(`Cod_materia`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `tb_estudiante` ADD `Encuesta_R` BOOLEAN NULL DEFAULT NULL AFTER `Cod_materia`;
