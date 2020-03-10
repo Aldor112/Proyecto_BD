@@ -29,6 +29,10 @@ if(is_null($arr['Cod_materia'])){
 }
  if(is_null($arr['Encuesta_R'])){
      $encuesta='No ha resuelto la Encuesta';
+     $link= '<a href="Encuesta.php" class="btn btn-primary">Realizar encuesta</a>';
+ }else{
+     $encuesta='Ha resuelto la encuesta';
+     $link=".";
  }
 
 ?> 
@@ -38,6 +42,7 @@ if(is_null($arr['Cod_materia'])){
 <ul class="list-group list-group-flush">
   <li class="list-group-item"><?php echo $username ?> </li>
   <li class="list-group-item">Materia inscrita: <?php echo $materia ?></li>
-  <li class="list-group-item">Promedio Ponderado: <?php echo $encuesta ?> <a href="Encuesta.php" class="btn btn-primary">Realizar encuesta</a></li>
+  <li class="list-group-item">Promedio Ponderado: <?php echo $encuesta?></li>
+  <?php echo $link ?>
   </ul>
 </body>

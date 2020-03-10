@@ -66,8 +66,6 @@ if (isset($_POST['P_1']) && isset($_POST['P_2']) && isset($_POST['P_3']) && isse
   }
 $promedio=$promedio/16;
 
-
-
 $sql3="SELECT * FROM tb_estudiante WHERE username=:username";
 $stmt=$conn->prepare($sql3);
 $stmt->bindParam(':username',$_SESSION['username']);
@@ -80,7 +78,6 @@ $stmt2->bindParam(':Cod_materia',$user['Cod_materia']);
 $stmt2->execute();
 $Materia=$stmt2->fetch(PDO::FETCH_ASSOC);
 
-
 $sql="UPDATE tb_profesor SET Promedio=:Promedio WHERE Cod_P=:Cod_P";
 $stmt3=$conn->prepare($sql);
 $stmt3->bindParam(':Cod_P',$Materia['Cod_P']);
@@ -88,6 +85,16 @@ $stmt3->bindParam(':Promedio',$promedio);
 
 if($stmt3->execute()){
     $message="Encuesta Realizada con exito";
+    $encuesta_r=TRUE;
+
+$sql4="UPDATE tb_estudiante SET Encuesta_R=:Encuesta_R WHERE username=:username";
+$stmt4=$conn->prepare($sql4);
+$stmt4->bindParam(':username',$_SESSION['username']);
+$stmt4->bindParam(':Encuesta_R',$encuesta_r);
+$stmt4->execute();
+
+    header('Location: contenido.php');
+
 }else{
     $message="Error al guardar la contraseña";
 }
