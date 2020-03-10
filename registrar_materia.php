@@ -1,6 +1,7 @@
 <?php 
-include('../includes/header.html');
-require('../bd/bd.php');
+include('./includes/header.html');
+include('./includes/navbar.html');
+require('./bd/bd.php');
 
 $message="";
     
@@ -26,7 +27,7 @@ if (!empty($_POST['Nomb_materia']) && !empty($_POST['Cod_materia']) && !empty($_
 ?>
 <body>
 <?php  if(!empty($message)): ?>
-    <p><?= $message ?></p>
+    <div class="alert alert-dark" role="alert"><?= $message ?></div>
 <?php endif; ?>
 <div class="mt-2">
         <!--Formulario para registrar materias -->

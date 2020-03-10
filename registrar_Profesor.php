@@ -1,6 +1,7 @@
 <?php 
-include('../includes/header.html');
-require('../bd/bd.php');
+include('./includes/header.html');
+include('./includes/navbar.html');
+require('./bd/bd.php');
 
 $message="";
 
@@ -11,9 +12,9 @@ if (!empty($_POST['Nomb_P']) && !empty($_POST['Cod_P'])) {
     $stmt->bindParam(':Cod_P',$_POST['Cod_P']);
 
     if ($stmt->execute()) {
-      $message = 'Successfully created new user';
+      $message = 'Profesor registrado con exito';
     } else {
-      $message = 'Sorry there must have been an issue creating your account';
+      $message = 'Error al registrar profesor, puede el codigo puede estar ya asignado';
     }
   }
 ?>
@@ -21,8 +22,9 @@ if (!empty($_POST['Nomb_P']) && !empty($_POST['Cod_P'])) {
 <body>
 
 <?php  if(!empty($message)): ?>
-    <p><?= $message ?></p>
+    <div class="alert alert-dark" role="alert"><?= $message ?></div>
 <?php endif; ?>
+
     <!--Formulario para registrar profesores-->
     <div class="mt-2">
     <form action="registrar_Profesor.php" method="post">

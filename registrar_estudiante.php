@@ -1,6 +1,7 @@
 <?php 
-include('../includes/header.html');
-require('../bd/bd.php');
+include('./includes/header.html');
+include('./includes/navbar.html');
+require('./bd/bd.php');
 
 $message=[];
 if(!empty($_POST['username'])){
@@ -23,7 +24,7 @@ if (!empty($_POST['username']) && !empty($_POST['contrasena']) && empty($_POST['
     $stmt->bindParam(':contrasena',$password);
 
     if ($stmt->execute()){
-        $message='Usuario creado exitosamente';
+        $message='Usuario creado exitosamente'; 
     }else{
         $message='Error al Crear un Usuario';
     }
@@ -49,22 +50,22 @@ if (!empty($_POST['username']) && !empty($_POST['contrasena']) && !empty($_POST[
 
 <body>
 <?php  if(!empty($message)): ?>
-    <p><?= $message ?></p>
+    <div class="alert alert-dark" role="alert"><?= $message ?></div>
 <?php endif; ?>
      <!--Formulario Para estudiante-->
      <div class="mt-2">
     <form action="registrar_estudiante.php" method="post">
-        <div class="form-group col-md-8" >
+        <div class=" col-md-8" >
         <div class="row form-control">
-            <div class="col form-control">
+            <div class="col form-group">
                 <label for="">Nombre del usuario a registrar: </label>
                 <input type="text" name="username" id="" placeholder="">
             </div>
-            <div class="col form-control">
+            <div class="col form-group">
                 <label for="">Contraseña de la cuenta:</label>
                 <input type="password" name="contrasena" id="">
             </div>
-            <div class="col form-control">
+            <div class="col form-group">
                 <label for="">  Codigo de la materia que estudia: </label>
                 <input type="text" name="Cod_materia" id="" placeholder="Deje en blanco si no tiene una">
             </div>
