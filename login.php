@@ -1,6 +1,7 @@
 <?php 
 session_start(); 
 include("includes/header.html"); 
+include('includes/navbar2.html');
 require("bd/bd.php");
 
 if(!empty($_POST['username']) && !empty($_POST['password'])){
@@ -24,7 +25,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])){
 
 <body>
 <?php  if (!empty($message)): ?>
-        <p><?=$message ?> </p>
+<div class="alert alert-dark" role="alert"><?= $message ?></div>
 <?php endif; ?>
 <div class="col-md-4 mx-auto">
         <div class="card mt-4 text-center"> 
