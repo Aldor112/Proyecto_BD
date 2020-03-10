@@ -2,7 +2,18 @@
 include('../includes/header.html');
 require('../bd/bd.php');
 
-$message="";
+$message=[];
+if(!empty($_POST['username'])){
+    $sql="SELECT username FROM tb_estudiante WHERE username=:username";
+    $stmt=$conn->prepare($sql);
+    $stmt->bindParam(':username',$_POST['username']);
+    $stmt->execute();
+    while($arr=$stmt->fetch(PDO::FETCH_ASSOC)){
+        if($arr['username']==$_POST['username']){
+            $message="Ya existe un usuario con este nombre";
+        }
+
+    }
 
 if (!empty($_POST['username']) && !empty($_POST['contrasena']) && empty($_POST['Cod_materia'])){
     $sql="INSERT INTO tb_estudiante (username,contrasena) VALUES (:username,:contrasena)";
@@ -29,10 +40,11 @@ if (!empty($_POST['username']) && !empty($_POST['contrasena']) && !empty($_POST[
     if ($stmt->execute()){
         $message='Usuario creado exitosamente';
     }else{
-        $message='Error al Crear un Usuario';
+        $message='Error al Crear un Usuario, el usuario puede estar ya registrado';
     }
 }
 
+}
 ?>
 
 <body>
