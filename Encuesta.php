@@ -78,10 +78,11 @@ $stmt2->bindParam(':Cod_materia',$user['Cod_materia']);
 $stmt2->execute();
 $Materia=$stmt2->fetch(PDO::FETCH_ASSOC);
 
-$sql="UPDATE tb_profesor SET Promedio=:Promedio WHERE Cod_P=:Cod_P";
+$sql="INSERT INTO tb_promedio_p (Cod_P,Promedio) VALUES (:Cod_P,:Promedio) ";
 $stmt3=$conn->prepare($sql);
 $stmt3->bindParam(':Cod_P',$Materia['Cod_P']);
 $stmt3->bindParam(':Promedio',$promedio);
+
 
 if($stmt3->execute()){
     $message="Encuesta Realizada con exito";
@@ -93,6 +94,23 @@ $stmt4->bindParam(':username',$_SESSION['username']);
 $stmt4->bindParam(':Encuesta_R',$encuesta_r);
 $stmt4->execute();
 
+$sql5="SELECT Promedio FROM tb_promedio_p WHERE Cod_P=:Cod_P";
+$stmt5=$conn->prepare($sql5);
+$stmt5->bindParam(':Cod_P',$Materia['Cod_P']);
+$stmt5->execute();
+$Promedio_ant=$stmt5->fetch(PDO::FETCH_ASSOC);
+$num=count($Promedio_ant);
+while(!is_null($Promedio_ant)){
+    $acum=$acum+$Promedio_ant['Promedio'];
+}
+
+$promedio= ($promedio + $acum)/$num;
+
+ $sql6="UPDATE tb_profesor SET Prom_Def=:Prom_def WHERE Cod_P=:Cod_P";
+ $stmt6=$conn->prepare($sql6);
+ $stmt6->bindParam(':Cod_P',$Materia['Cod_P']);
+ $stmt6->bindParam(':Prom_def',$promedio);
+ $stmt6->execute();
     header('Location: contenido.php');
 
 }else{

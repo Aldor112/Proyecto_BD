@@ -18,12 +18,6 @@ $arr=$stmt->fetch(PDO::FETCH_ASSOC);
 if(is_null($arr['Cod_materia'])){
     $materia='No tiene inscrita ninguna materia';
 }else{
-   /* $sql="SELECT Nomb_materia FROM tb_materia WHERE Cod_materia=:Cod_materia";
-    $stmt=$conn->prepare($sql);
-    $stmt->bindParam(':Cod_Materia',$arr['Cod_Materia']);
-    $stmt->execute();
-    $result=$stmt->fetch(PDO::FETCH_ASSOC);
-    $materia=$arr['Cod_materia']; */
     $materia= $arr['Cod_materia'];
 
 }
