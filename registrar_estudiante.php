@@ -3,7 +3,7 @@ include('./includes/header.html');
 include('./includes/navbar.html');
 require('./bd/bd.php');
 
-$message=[];
+$message="";
 if(!empty($_POST['username'])){
     $sql="SELECT username FROM tb_estudiante WHERE username=:username";
     $stmt=$conn->prepare($sql);

@@ -24,6 +24,9 @@ if(is_null($arr['Cod_materia'])){
  if(is_null($arr['Encuesta_R'])){
      $encuesta='No ha resuelto la Encuesta';
      $link= '<a href="Encuesta.php" class="btn btn-primary">Realizar encuesta</a>';
+ }if(is_null($arr['Encuesta_R']) && is_null($arr['Notas'])){
+    $encuesta='No esta inscrito en ninguna materia';
+    $link='.';
  }else{
      $encuesta='Ha resuelto la encuesta';
      $link=".";
