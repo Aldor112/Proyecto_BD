@@ -9,6 +9,7 @@ include('includes/header.html');
     <a href="./registrar_estudiante.php" class="btn btn-primary">Registrar Estudiantes</a>
     <a href="./registrar_Profesor.php" class="btn btn-secondary">Registrar Profesores</a>
     <a href="./registrar_materia.php" class="btn btn-danger">Registrar Materias</a>
+    <a href="./Mod_nota.php" class="btn btn-info">Registrar Notas para un alumno</a>
     <p class="card-text">O Inicie Sesion</p>
     <a href="./login.php" class="btn btn-success">Iniciar Sesion</a>
   </div>
