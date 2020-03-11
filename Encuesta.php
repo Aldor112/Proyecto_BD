@@ -93,18 +93,21 @@ $stmt4=$conn->prepare($sql4);
 $stmt4->bindParam(':username',$_SESSION['username']);
 $stmt4->bindParam(':Encuesta_R',$encuesta_r);
 $stmt4->execute();
-
+//checar esto porque no funciona bien
 $sql5="SELECT Promedio FROM tb_promedio_p WHERE Cod_P=:Cod_P";
 $stmt5=$conn->prepare($sql5);
 $stmt5->bindParam(':Cod_P',$Materia['Cod_P']);
 $stmt5->execute();
-$Promedio_ant=$stmt5->fetch(PDO::FETCH_ASSOC);
-$num=count($Promedio_ant);
-while(!is_null($Promedio_ant)){
+
+$acum=0;
+$acum2=0;
+while($Promedio_ant=$stmt5->fetch(PDO::FETCH_ASSOC)){
     $acum=$acum+$Promedio_ant['Promedio'];
+    $acum2++;
 }
 
-$promedio= ($promedio + $acum)/$num;
+
+$promedio= ($promedio + $acum)/$acum2;
 
  $sql6="UPDATE tb_profesor SET Prom_Def=:Prom_def WHERE Cod_P=:Cod_P";
  $stmt6=$conn->prepare($sql6);
