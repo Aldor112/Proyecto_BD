@@ -5,12 +5,15 @@ require("bd/bd.php");
 
 
 if(!empty($_POST['username']) && !empty($_POST['nota'])){
+    $comprobacion=$_POST['nota'];
+   if(is_numeric($comprobacion) && $comprobacion>=0 && $comprobacion<=10){
     $records=$conn->prepare("SELECT * FROM tb_estudiante WHERE username=:username");
     $records->bindParam(':username',$_POST['username']);
     $records->execute();
     $results=$records->fetch(PDO::FETCH_ASSOC);
 
     $message="";
+    $message2="";
     if($_POST['username']==$results['username']){
     $sql="INSERT INTO tb_notas_estudiante (Notas,Cod_materia,username) VALUES (:Notas,:Cod_materia,:username)";
     $stmt=$conn->prepare($sql);
@@ -25,12 +28,15 @@ if(!empty($_POST['username']) && !empty($_POST['nota'])){
     }
 }else{
     $message="Introduzca todos los datos";
+    $message2="Recuerde que la nota solo pueden ser un numero entre 0 y 10";
+}
 }
 ?>
 
 <body>
 <?php  if (!empty($message)): ?>
 <div class="alert alert-success" role="alert"><?= $message ?></div>
+<div class="alert alert-warning" role="alert"><?= $message2 ?></div>
 <?php endif; ?>
 <div class="col-md-4 text-center">
     <div class="card-header">
